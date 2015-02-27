@@ -3,14 +3,91 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Wimbledon 2013 results</title>
+    <link rel="stylesheet" type=text/css" href="results.css" title="Result styles" media="screen">
+    <script type="text/javascript" src="search.js"></script>
 </head>
 <body>
-<form>
-    <label>Player search</label>
-    <textarea>Player Search</textarea>
-    <button onclick="">Search</button>
-    
-</form>
+<div class="lookup">
+    <form action="">
+        <h2>Wimbledon 2013 results look up</h2>
+        <br/>
+        <br/>
+        <label>Select category
+            <select name="category">
+                <option value="men">Men's results</option>
+                <option value="women">Women's results</option>
+            </select>
+        </label>
+        <br/>
+        <br/>
+        <label>Player's name
+            <input type="text" name="player" id="name_box">
+        </label>
+        <br/>
+        <br/>
+        <label>Match case
+            <input type="radio" name="word_match" value="contains">contains
+            <input type="radio" name="word_match" value="equals">equals
+        </label>
+        <!-- The whole construct should be encapsulated in an accordion and filter should be collapsable
+        under Advanced Search-->
+        <br/>
+        <br/>
+        <h4>Filter results</h4>
+        <label>Select number of sets
+            <select name="sets">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </label>
+        <br/>
+        <label>Condition
+            <input type="radio" name="pred" value="equals">equals
+            <input type="radio" name="pred" value="greater than">greater than
+            <input type="radio" name="pred" value="less than">less than
+        </label>
+        <br/>
+        <br/>
+        <label>Select round
+            <select name="round">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+        </label>
+        <br/>
+        <br/>
+        <label>Condition
+            <input type="radio" name="pred1" value="equals">equals
+            <input type="radio" name="pred1" value="greater than">greater than
+            <input type="radio" name="pred1" value="less than">less than
+        </label>
+        <br/>
+        <h4>Sort results</h4>
+        <label>Select sorting
+            <select name="sort">
+                <option value="ascending">Ascending</option>
+                <option value="descending">Descending</option>
+            </select>
+        </label>
+        <br/>
+        <br/>
+        <button type="submit" onclick=findResults(category,player,word_match,sets,pred,round,pred1,sort)>Search</button>
+    </form>
+</div>
+
+
+<div id="display">
+    <p id="player_result"></p>
+
+</div>
 
 </body>
 </html>
