@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <title>Wimbledon 2013 results</title>
     <link rel="stylesheet" type=text/css" href="results.css" title="Result styles" media="screen">
-    <script type="text/javascript" src="search.js"></script>
 </head>
 <body>
+<script type="text/javascript" src="jquery-2.1.3.js"></script>
+<script type="text/javascript" src="search.js"></script>
 <div class="lookup">
     <form action="">
-        <h2>Wimbledon 2013 results look up</h2>
-        <br/>
+        <h3>Wimbledon 2013 results look up</h3>
         <br/>
         <label>Select category
-            <select name="category">
+            <select id="category">
                 <option value="men">Men's results</option>
                 <option value="women">Women's results</option>
             </select>
@@ -21,7 +21,7 @@
         <br/>
         <br/>
         <label>Player's name
-            <input type="text" name="player" id="name_box">
+            <input type="text" name="player" id="player">
         </label>
         <br/>
         <br/>
@@ -35,7 +35,7 @@
         <br/>
         <h4>Filter results</h4>
         <label>Select number of sets
-            <select name="sets">
+            <select id="sets">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -44,15 +44,14 @@
             </select>
         </label>
         <br/>
-        <label>Condition
-            <input type="radio" name="pred" value="equals">equals
-            <input type="radio" name="pred" value="greater than">greater than
-            <input type="radio" name="pred" value="less than">less than
-        </label>
+        <br/>
+            <input type="radio" name="group1" value="equals">equals
+            <input type="radio" name="group1" value="greater than">greater than
+            <input type="radio" name="group1" value="less than">less than
         <br/>
         <br/>
         <label>Select round
-            <select name="round">
+            <select id="round">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -64,28 +63,26 @@
         </label>
         <br/>
         <br/>
-        <label>Condition
-            <input type="radio" name="pred1" value="equals">equals
-            <input type="radio" name="pred1" value="greater than">greater than
-            <input type="radio" name="pred1" value="less than">less than
-        </label>
+            <input type="radio" name="group2" value="equals">equals
+            <input type="radio" name="group2" value="greater than">greater than
+            <input type="radio" name="group2" value="less than">less than
         <br/>
         <h4>Sort results</h4>
         <label>Select sorting
-            <select name="sort">
+            <select id="sort">
                 <option value="ascending">Ascending</option>
                 <option value="descending">Descending</option>
             </select>
         </label>
         <br/>
         <br/>
-        <button type="submit" onclick=findResults(category,player,word_match,sets,pred,round,pred1,sort)>Search</button>
+        <!--method call needs to return false; otherwise the result will disappear immediately-->
+        <button type="submit" onclick="findResults();return false">Search</button>
     </form>
 </div>
 
 
 <div id="display">
-    <p id="player_result"></p>
 
 </div>
 
