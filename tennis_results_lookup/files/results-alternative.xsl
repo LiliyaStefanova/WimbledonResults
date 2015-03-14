@@ -13,50 +13,53 @@
                     <th>Set 5</th>
                 </tr>
                 <xsl:apply-templates select="match"/>
-              <!--  <xsl:sort select=".//round" order="ascending"/>-->
-                <xsl:apply-templates select="player"/>
+                    <xsl:apply-templates select="player"/>
 
             </table>
         </html>
     </xsl:template>
-
+    
     <xsl:template match="match">
         <xsl:choose>
-        <xsl:when test = ".">
-        <xsl:apply-templates select="player"/>
+            <xsl:when test=".//name = 'A.Murray' and count(.//set)>3">
+                 <xsl:apply-templates select="player"/>
         </xsl:when>
         </xsl:choose>
     </xsl:template>
     
     <xsl:template match="player">
+      <!--  <xsl:choose> -->
+          <!--  <xsl:when test="name = 'A.Murray' and count(set)>3"> -->
                 <tr align="left" padding-right="15px">
                     <td>
-                    
                         <xsl:value-of select="../round"/>
                     </td>
                     <td>
                         <xsl:choose>
-                        <xsl:when test="outcome='won'">
-                            <td>
-                                <span style="font-weight:bold">
+                            <xsl:when test="outcome='won'">
+                                <td>
+                                    <span style="font-weight:bold">
+                                        <xsl:value-of select="name"/>
+                                    </span>
+                                </td>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <td>
                                     <xsl:value-of select="name"/>
-                                </span>
-                            </td>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <td>
-                                <xsl:value-of select="name"/>
-                            </td>
-                        </xsl:otherwise>
+                                </td>
+                            </xsl:otherwise>
                         </xsl:choose>
                     </td>
-                    <xsl:for-each select="set">
+                     <xsl:for-each select="set">
                         <td>
                             <xsl:if test="position()&lt;5">
-                                <xsl:value-of select="."/>
+                             <xsl:value-of select="."/>
                             </xsl:if>
-                        </td>
-                    </xsl:for-each>
+                    </td>
+                </xsl:for-each>
                 </tr>
+          <!--  </xsl:when>
+        </xsl:choose> -->
     </xsl:template>
+    
 </xsl:stylesheet>

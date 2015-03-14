@@ -9,7 +9,7 @@
 <script type="text/javascript" src="jquery-2.1.3.js"></script>
 <script type="text/javascript" src="search.js"></script>
 <div class="lookup">
-    <form action="">
+    <form id="criteria" action="">
         <h3>Wimbledon 2013 results look up</h3>
         <br/>
         <label>Select category
@@ -26,8 +26,10 @@
         <br/>
         <br/>
         <label>Match case
-            <input type="radio" name="word_match" value="contains">contains
-            <input type="radio" name="word_match" value="equals">equals
+            <select id="match_case">
+                <option value="contains">contains</option>
+                <option value="equals">equals</option>
+            </select>
         </label>
         <!-- The whole construct should be encapsulated in an accordion and filter should be collapsable
         under Advanced Search-->
@@ -78,6 +80,7 @@
         <br/>
         <!--method call needs to return false; otherwise the result will disappear immediately-->
         <button type="submit" onclick="findResults();return false">Search</button>
+        <button type="reset"  onclick="resetForm();return false">New Search</button>
     </form>
 </div>
 
