@@ -4,15 +4,19 @@
     <!-- Example styling references: 
          http://www.webreference.com/programming/css_stylish/index.html 
          http://www.htmlgoodies.com/tutorials/forms/article.php/3888746/HTML-Forms-From-Basics-to-Style-Layouts.htm-->
+
+    <!-- IMPORTANT NOTE: In Google Chrome, xml files are blocked from accessing local XSLT files if they are in the same directory
+         CSS files can be accessed from HTML however. Full detail of the issue is documented via the link below: 
+         http://stackoverflow.com/questions/4558160/xsl-not-working-in-google-chrome
+         Use the DCS web page set up to access for Chrome:http://titan.dcs.bbk.ac.uk/~lstefa01/IWT1/results.html
+         or run with --allow-file-access-from-files with varying degrees of success in order to access -->
     <meta charset="UTF-8">
     <title>Wimbledon 2013 results</title>
     <link rel="stylesheet" type="text/css" href="results.css" title="Result styles" media="screen"/>
-    <!--TODO set up a web page to have this display via chrome -->
 </head>
 <body>
 <script type="text/javascript" src="jquery-2.1.3.js"></script>
 <script type="text/javascript" src="search.js"></script>
-
 <form id="criteria" action="">
     <div class="lookup">
         <fieldset>
@@ -23,6 +27,7 @@
                     <option value="men">Men's results</option>
                     <option value="women">Women's results</option>
                 </select></p>
+            <hr class="line"/>
             <p><label for="player">Player's name</label>
                 <input type="text" name="player" id="player"></p>
 
@@ -31,22 +36,26 @@
                     <option value="contains">contains</option>
                     <option value="equals">equals</option>
                 </select></p>
+            <hr class="line"/>
             <!-- The whole construct should be encapsulated in an accordion and filter should be collapsable
             under Advanced Search-->
-            <p><label for="sets">Sets played</label>
+            <p class="filter"><label for="sets">Sets played</label>
                 <select id="sets">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
                     <option value="5">5</option>
-                </select></p>
-            <p class="filters"><label for="eq2"><input type="radio" id="eq1" name="group2" value="equals">equals</label>
-                <label for="gt2"><input type="radio" id="gt1" name="group2" value="greater than">greater than</label>
-                <label for="lt2"><input type="radio" id="lt1" name="group2" value="less than">less than</label>
+                </select>
+                <br/>
+                <br/>
+                <label for="eq1"><input type="radio" id="eq1" name="group1" value="equals">equals</label>
+                <label for="gt1"><input type="radio" id="gt1" name="group1" value="greater than">greater than</label>
+                <label for="lt1"><input type="radio" id="lt1" name="group1" value="less than">less than</label>
             </p>
-
-            <p><label for="round">Round</label>
+            <br/>
+            <hr class="line"/>
+            <p class="filter"><label for="round">Round</label>
                 <select id="round">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -55,14 +64,15 @@
                     <option value="5">5</option>
                     <option value="6">6</option>
                     <option value="7">7</option>
-                </select></p>
-            <p class="filters">
+                </select>
+                <br/>
+                <br/>
                 <label for="eq2"><input type="radio" id="eq2" name="group2" value="equals">equals</label>
                 <label for="gt2"><input type="radio" id="gt2" name="group2" value="greater than">greater than</label>
                 <label for="lt2"><input type="radio" id="lt2" name="group2" value="less than">less than</label>
             </p>
             <br/>
-
+            <hr class="line"/>
             <p><label for="sort">Sort by round</label>
                 <select id="sort">
                     <option value="ascending">Ascending order</option>
@@ -76,10 +86,11 @@
 <button type="submit" class="btn" onclick="findResults();return false">Search</button>
 <button type="reset" class="btn" onclick="resetForm();return false">Start again</button>
 <br/>
-
-<div id="display">
-    <!--TODO need to format this div section so it does not appear immediately below buttons-->
-</div>
-
+<br/>
+<fieldset>
+    <legend id="results">Results</legend>
+    <div id="display">
+    </div>
+</fieldset>
 </body>
 </html>

@@ -1,57 +1,81 @@
-/* TODO radio button styling is not being detected */
-
-body {
-}
-
 .lookup {
     border: solid darkgrey thin;
     width: 500px;
     background-color: lightgrey;
 }
-.filters{
-    margin-bottom: 0.5em;
-    margin-top: 0.1em;
 
-}
 fieldset {
     margin: 0 0 0 -10px;
     padding: 10px;
     border: none;
 }
 legend {
-    font-size: 20px;
     background-color: darkgrey;
+    font: bold 20px 'trebuchet ms', helvetica, sans-serif;
     color: purple;
     width: 100%;
     padding: 5px;
 }
+
+.filter{
+    margin: 0.1em;
+}
+#results{
+    width: 495px;
+    height:20px;
+    font: bold 20px 'trebuchet ms', helvetica, sans-serif;
+    color: purple;
+    background-color: darkgrey;
+    border: solid darkgrey thin;
+}
+
+.line{
+    width:485px;
+    border: none;
+    color:darkgrey;
+    background-color:darkgray;
+    height:1px;
+    margin:3px;
+    
+}
+.display{
+    width:500px;
+    float:left;
+    border:solid grey 2px;
+    margin-left:5px;
+    padding: 0px 10px;
+    background:lightgray;
+    
+}
+
 label {
-    font: bold 68% 'trebuchet ms', helvetica, sans-serif;
+    font: bold 80% 'trebuchet ms', helvetica, sans-serif;
     width: 100px;
     float: left;
     text-align: left;
     display: inline;
 }
+
 fieldset p {
     clear: both;
     padding: 5px;
 }
 
 #player {
-    width: 300px;
+    width: 250px;
 }
 
 input[type=radio] {
     display: inline-block;
-    margin-left: 0.7em;
+    margin-left: 0.1em;
     _top: 0.5em;
 }
 
-#eq2 label, #gt2 label, #lt2 label, #eq1 label, #gt1 label, #lt1 label {
+label {
     display: inline-block;
     position: relative;
     margin-left: 0.2em;
-    _top: 0.5em;
+    _top: 0.3em;
 }
 .btn {
     color: darkslategray;

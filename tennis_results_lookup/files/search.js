@@ -1,7 +1,7 @@
 /**
  * Created by liliya on 26/02/2015.
  * IMPORTANT NOTE: In Google Chrome, xml files are blocked from accessing local XSLT files if they are in the same directory
- * CSS files can be accessed from HTML however. Full detail of the issue is documented via the link below: 
+ * CSS files can be accessed from HTML however. Full detail of the issue is documented via the link below:
  * http://stackoverflow.com/questions/4558160/xsl-not-working-in-google-chrome
  * Use the DCS web page set up to access for Chrome, or run with --allow-file-access-from-files with varying degrees of success
  */
@@ -43,7 +43,6 @@ function findResults() {
     chooseCategory();    //load the data file
     var playerName = document.getElementById('player').value;
     if (playerName === "") {
-        //FIXME not working properly
         testQueryString = filterResultsByRound(testQueryString);
         testQueryString = filterResultsByNumberSets(testQueryString);
         $(styleSheet).find("xsl\\:when, when").first().attr("test", testQueryString);
@@ -73,9 +72,7 @@ function findResults() {
     else {
         window.alert("Not working");
     }
-
 }
-
 /* Part 2c
  This function looks up the number of sets selected and the filtering criteria - eq, gt, lt
  The outcome is a string which is appended to the overall testCondition that will be fed into the stylesheet
@@ -91,18 +88,32 @@ function filterResultsByNumberSets(xString) {
         }
     }
     if (radioVal === "equals") {
-        xString += " and " + "count(.//set) = " + numberSets;
+        if (xString === "") {
+            xString += "count(.//set)= " + numberSets;
+        }
+        else{
+            xString += " and " + "count(.//set)= " + numberSets;
+        }
     }
     else if (radioVal === "greater than") {
-        xString += " and " + "count(.//set) >" + numberSets;
+        if (xString === "") {
+            xString += "count(.//set)> " + numberSets;
+        }
+        else{
+            xString += " and " + "count(.//set)> " + numberSets;
+        }
     }
     else if (radioBtns === "less than") {
-        xString += " and " + "count(.//set) <" + numberSets;
-    }
+            if (xString === "") {
+                xString += "count(.//set)< " + numberSets;
+            }
+            else {
+                xString += " and " + "count(.//set)< " + numberSets;
+            }
+        }
     return xString;
-
-}
-
+    }
+    
 /* Part 2d
  This function looks up the value of round selected and the filtering criteria - eq, gt, lt
  The outcome is a string which is appended to the overall testCondition that will be fed into the stylesheet
@@ -124,13 +135,28 @@ function filterResultsByRound(xString) {
         }
     }
     if (radioVal === "equals") {
-        xString += "and " + "round = " + roundNumber;
+        if (xString === "") {
+            xString += "round = " + roundNumber;
+        }
+        else {
+            xString += "and " + "round = " + roundNumber;
+        }
     }
     else if (radioVal === "greater than") {
-        xString += "and " + "round >" + roundNumber;
+        if (xString === "") {
+            xString += "round > " + roundNumber;
+        }
+        else {
+            xString += "and " + "round > " + roundNumber;
+        }
     }
     else if (radioVal === "less than") {
-        xString += "and " + "round <" + roundNumber;
+        if (xString === "") {
+            xString += "round < " + roundNumber;
+        }
+        else {
+            xString += "and " + "round < " + roundNumber;
+        }
     }
     return xString;
 }
@@ -150,7 +176,6 @@ function sortResultsByRound(styleSheet) {
     }
     return styleSheet;
 }
-
 /*
  This function is a helper which takes in the XML and the dynamically modified stylesheet and generates
  the document fragment to be appended to the appropriate section of the html page
@@ -166,16 +191,11 @@ function loadAndDisplay(results, styleSheet) {
         window.alert("Your browser does not support the XSLTProcessor object");
     }
 }
-
 /*
  This method is used to reset the form and clear out any results from the previous query if the users 
  wants to do a new search 
  */
 function resetForm() {
-    var displayDiv = document.getElementById('display');
-    var children = displayDiv.childNodes;
-    for (var i = 0, len = children.length; i < len; i++) {
-        displayDiv.removeChild(children[i]);
-    }
+    $('#display').empty();
     $('#criteria').trigger("reset");
 }

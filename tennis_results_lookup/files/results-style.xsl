@@ -2,8 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:template match="tournament">
         <html>
-            <table border="1" cellspacing="0">
-                <tr align="left" padding-right="15px">
+            <table border="1px" cellspacing="1px" border-collapse="collapse">
+                <tr align="left" padding-right="15px" font-family="Helvetica" font-size="8px">
                     <th>Round</th>
                     <th>Player</th>
                     <th>Set 1</th>
@@ -27,24 +27,24 @@
         </xsl:choose>
     </xsl:template>
     <xsl:template match="player">
-        <tr align="left" padding-right="15px">
+        <tr align="left" padding-right="15px" font-family="Helvetica" font-size="8px">
             <td>
                 <xsl:value-of select="../round"/>
             </td>
-                <xsl:choose>
-                    <xsl:when test="outcome='won'">
-                        <td>
-                            <span style="font-weight:bold">
-                                <xsl:value-of select="name"/>
-                            </span>
-                        </td>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <td>
+            <xsl:choose>
+                <xsl:when test="outcome='won'">
+                    <td>
+                        <span style="font-weight:bold">
                             <xsl:value-of select="name"/>
-                        </td>
-                    </xsl:otherwise>
-                </xsl:choose>
+                        </span>
+                    </td>
+                </xsl:when>
+                <xsl:otherwise>
+                    <td>
+                        <xsl:value-of select="name"/>
+                    </td>
+                </xsl:otherwise>
+            </xsl:choose>
             <xsl:for-each select="set">
                 <td>
                     <xsl:if test="position()&lt;5">
