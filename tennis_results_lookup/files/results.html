@@ -1,92 +1,126 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <!-- Example styling references: 
+         http://www.webreference.com/programming/css_stylish/index.html 
+         http://www.htmlgoodies.com/tutorials/forms/article.php/3888746/HTML-Forms-From-Basics-to-Style-Layouts.htm-->
     <meta charset="UTF-8">
     <title>Wimbledon 2013 results</title>
     <link rel="stylesheet" type=text/css" href="results.css" title="Result styles" media="screen">
+    <style media="screen" type="text/css">
+        body{
+        }
+        .lookup{
+            border:solid darkgrey thin;
+            width: 500px;
+            background-color: lightgrey;
+        }
+        fieldset {
+            margin: 0 0 0 -10px;
+            padding: 10px;
+            border:none;
+        }
+        legend {
+            font-size: 20px;
+            background-color: darkgrey;
+            color: purple;
+            width: 100%;
+            padding: 5px;
+        }
+        label {
+            font: bold 68% 'trebuchet ms', helvetica, sans-serif;
+            width:100px;
+            float: left;
+            text-align: left;
+        }
+        .radio{
+            font: bold 68% 'trebuchet ms', helvetica, sans-serif;
+        }
+        fieldset p {
+            clear: both;
+            padding: 5px;
+        }
+        #player{
+            width:300px;
+
+            
+        }
+        .btn {
+            color: darkslategray;
+            font: bold 84% 'trebuchet ms', helvetica, sans-serif;
+        }
+    </style>
 </head>
 <body>
 <script type="text/javascript" src="jquery-2.1.3.js"></script>
 <script type="text/javascript" src="search.js"></script>
-<div class="lookup">
-    <form id="criteria" action="">
-        <h3>Wimbledon 2013 results look up</h3>
-        <br/>
-        <label>Select category
-            <select id="category">
-                <option value="men">Men's results</option>
-                <option value="women">Women's results</option>
-            </select>
-        </label>
-        <br/>
-        <br/>
-        <label>Player's name
-            <input type="text" name="player" id="player">
-        </label>
-        <br/>
-        <br/>
-        <label>Match case
-            <select id="match_case">
-                <option value="contains">contains</option>
-                <option value="equals">equals</option>
-            </select>
-        </label>
-        <!-- The whole construct should be encapsulated in an accordion and filter should be collapsable
-        under Advanced Search-->
-        <br/>
-        <br/>
-        <h4>Filter results</h4>
-        <label>Select number of sets
-            <select id="sets">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </label>
-        <br/>
-        <br/>
-            <input type="radio" name="group1" value="equals">equals
-            <input type="radio" name="group1" value="greater than">greater than
-            <input type="radio" name="group1" value="less than">less than
-        <br/>
-        <br/>
-        <label>Select round
-            <select id="round">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </select>
-        </label>
-        <br/>
-        <br/>
-            <input type="radio" name="group2" value="equals">equals
-            <input type="radio" name="group2" value="greater than">greater than
-            <input type="radio" name="group2" value="less than">less than
-        <br/>
-        <h4>Sort results</h4>
-        <label>Select sorting
-            <select id="sort">
-                <option value="ascending">Ascending</option>
-                <option value="descending">Descending</option>
-            </select>
-        </label>
-        <br/>
-        <br/>
-        <!--method call needs to return false; otherwise the result will disappear immediately-->
-        <button type="submit" onclick="findResults();return false">Search</button>
-        <button type="reset"  onclick="resetForm();return false">New Search</button>
-    </form>
-</div>
 
+<form id="criteria" action="">
+    <div class="lookup">
+        <fieldset>
+            <legend>Look up Wimbledon 2013 results</legend>
+
+            <p><label for="category">Select category</label>
+                <select id="category">
+                    <option value="men">Men's results</option>
+                    <option value="women">Women's results</option>
+                </select></p>
+            <p><label for="player">Player's name</label>
+                <input type="text" name="player" id="player"></p>
+
+            <p><label for="match_case">Match case</label>
+                <select id="match_case">
+                    <option value="contains">contains</option>
+                    <option value="equals">equals</option>
+                </select></p>
+            <!-- The whole construct should be encapsulated in an accordion and filter should be collapsable
+            under Advanced Search-->
+
+            <p><label for="sets">Select number of sets</label>
+                <select id="sets">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select></p>
+            <p>
+                <input type="radio" class="radio" name="group1" value="equals">equals
+                <input type="radio" class="radio" id="gt1" name="group1" value="greater than">greater than
+                <input type="radio" class="radio" name="group1" value="less than">less than
+            </p>
+
+            <p><label for="round">Select round</label>
+                <select id="round">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select></p>
+            <p><input type="radio"  class="radio" name="group2" value="equals">equals
+                <input type="radio" class="radio" id="gt2" name="group2" value="greater than">greater than
+                <input type="radio" class="radio" name="group2" value="less than">less than
+            </p>
+            <p><label for="sort">Sort by round</label>
+                <select id="sort">
+                    <option value="ascending">Ascending</option>
+                    <option value="descending">Descending</option>
+                </select></p>
+        </fieldset>
+    </div>
+</form>
+<br/>
+<!--method call needs to return false; otherwise the result will disappear immediately-->
+<button type="submit" class="btn" onclick="findResults();return false">Search</button>
+<button type="reset" class="btn" onclick="resetForm();return false">Start again</button>
+<br/>
 
 <div id="display">
 
+    <!--TODO need to format this div section so it does not appear immediately below buttons-->
 </div>
 
 </body>
