@@ -15,9 +15,7 @@
                 <xsl:apply-templates select="match">
                     <xsl:sort select="round" order="ascending" data-type="number"/>
                 </xsl:apply-templates>
-                <!--  <xsl:sort select=".//round" order="ascending"/>-->
                 <xsl:apply-templates select="player"/>
-                
             </table>
         </html>
     </xsl:template>
@@ -33,7 +31,6 @@
             <td>
                 <xsl:value-of select="../round"/>
             </td>
-            <td>
                 <xsl:choose>
                     <xsl:when test="outcome='won'">
                         <td>
@@ -48,7 +45,6 @@
                         </td>
                     </xsl:otherwise>
                 </xsl:choose>
-            </td>
             <xsl:for-each select="set">
                 <td>
                     <xsl:if test="position()&lt;5">

@@ -46,7 +46,7 @@ function findResults() {
         //FIXME not working properly
         testQueryString = filterResultsByRound(testQueryString);
         testQueryString = filterResultsByNumberSets(testQueryString);
-        $(styleSheet).find("xsl\\:when", "when").first().attr("test", testQueryString);
+        $(styleSheet).find("xsl\\:when, when").first().attr("test", testQueryString);
         loadAndDisplay(results, styleSheet);
         window.alert("No player specified - all results for category will be displayed");
         return;
@@ -56,15 +56,18 @@ function findResults() {
         testQueryString = filterResultsByRound(testQueryString);
         testQueryString = filterResultsByNumberSets(testQueryString);
         styleSheet = sortResultsByRound(styleSheet);
-        $(styleSheet).find("xsl\\:when", "when").first().attr("test", testQueryString);
+        $(styleSheet).find("xsl\\:when, when").first().attr("test", testQueryString);
         loadAndDisplay(results, styleSheet);
+        console.log((new XMLSerializer()).serializeToString(styleSheet));
+
+        // console.log(styleSheet);
     }
     else if ($('#match_case')[0].value === "contains") {
         testQueryString += ".//name[contains(., '" + playerName + "'" + ")]";
         testQueryString = filterResultsByRound(testQueryString);
         testQueryString = filterResultsByNumberSets(testQueryString);
         styleSheet = sortResultsByRound(styleSheet);
-        $(styleSheet).find("xsl\\:when", "when").first().attr("test", testQueryString);
+        $(styleSheet).find("xsl\\:when, when").first().attr("test", testQueryString);
         loadAndDisplay(results, styleSheet);
     }
     else {
@@ -140,10 +143,10 @@ function filterResultsByRound(xString) {
  */
 function sortResultsByRound(styleSheet) {
     if ($('#sort')[0].value === "ascending") {
-        $(styleSheet).find("xsl\\:sort", "sort").first().attr("order", "ascending");
+        $(styleSheet).find("xsl\\:sort, sort").first().attr("order", "ascending");
     }
     else {
-        $(styleSheet).find("xsl\\:sort", "sort").first().attr("order", "descending");
+        $(styleSheet).find("xsl\\:sort, sort").first().attr("order", "descending");
     }
     return styleSheet;
 }
