@@ -1,21 +1,59 @@
-body{
-    font-family: Georgia,"Times New Roman", Times, serif;
-    background-color: #99FF99;
-}
-h2{
+/* TODO radio button styling is not being detected */
 
-
-}
-h4{
-
-
-}
-.lookup{
-
-
-}
-.label{
-    font-family: Georgia,"Times New Roman", Times, serif;
-    font-weight: bold;
+body {
 }
 
+.lookup {
+    border: solid darkgrey thin;
+    width: 500px;
+    background-color: lightgrey;
+}
+.filters{
+    margin-bottom: 0.5em;
+    margin-top: 0.1em;
+
+}
+fieldset {
+    margin: 0 0 0 -10px;
+    padding: 10px;
+    border: none;
+}
+legend {
+    font-size: 20px;
+    background-color: darkgrey;
+    color: purple;
+    width: 100%;
+    padding: 5px;
+}
+label {
+    font: bold 68% 'trebuchet ms', helvetica, sans-serif;
+    width: 100px;
+    float: left;
+    text-align: left;
+    display: inline;
+}
+fieldset p {
+    clear: both;
+    padding: 5px;
+}
+
+#player {
+    width: 300px;
+}
+
+input[type=radio] {
+    display: inline-block;
+    margin-left: 0.7em;
+    _top: 0.5em;
+}
+
+#eq2 label, #gt2 label, #lt2 label, #eq1 label, #gt1 label, #lt1 label {
+    display: inline-block;
+    position: relative;
+    margin-left: 0.2em;
+    _top: 0.5em;
+}
+.btn {
+    color: darkslategray;
+    font: bold 84% 'trebuchet ms', helvetica, sans-serif;
+}

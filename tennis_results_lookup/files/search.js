@@ -1,9 +1,10 @@
 /**
  * Created by liliya on 26/02/2015.
+ * IMPORTANT NOTE: In Google Chrome, xml files are blocked from accessing local XSLT files if they are in the same directory
+ * CSS files can be accessed from HTML however. Full detail of the issue is documented via the link below: 
+ * http://stackoverflow.com/questions/4558160/xsl-not-working-in-google-chrome
+ * Use the DCS web page set up to access for Chrome, or run with --allow-file-access-from-files with varying degrees of success
  */
-
-
-
 var results = null;
 
 // Method to retrieve the XML from the file location
@@ -138,7 +139,7 @@ function filterResultsByRound(xString) {
  the amended stylesheet is then returned to where it was called(main function)
  */
 function sortResultsByRound(styleSheet) {
-    if ($('#sort')[0].value === "Ascending") {
+    if ($('#sort')[0].value === "ascending") {
         $(styleSheet).find("xsl\\:sort", "sort").first().attr("order", "ascending");
     }
     else {
@@ -170,6 +171,8 @@ function loadAndDisplay(results, styleSheet) {
 function resetForm() {
     var displayDiv = document.getElementById('display');
     var children = displayDiv.childNodes;
-    displayDiv.removeChild(children[1]);
+    for (var i = 0, len = children.length; i < len; i++) {
+        displayDiv.removeChild(children[i]);
+    }
     $('#criteria').trigger("reset");
 }
