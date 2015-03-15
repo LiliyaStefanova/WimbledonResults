@@ -42,14 +42,17 @@ function findResults() {
     var testQueryString = "";
     chooseCategory();    //load the data file
     var playerName = document.getElementById('player').value;
+    
+    //Case to deal with empty player text field
     if (playerName === "") {
         testQueryString = filterResultsByRound(testQueryString);
         testQueryString = filterResultsByNumberSets(testQueryString);
+        styleSheet = sortResultsByRound(styleSheet);
         $(styleSheet).find("xsl\\:when, when").first().attr("test", testQueryString);
         loadAndDisplay(results, styleSheet);
-        window.alert("No player specified - all results for category will be displayed");
         return;
     }
+    //Case to deal with full name specified with equals match case
     if ($('#match_case')[0].value === "equals") {
         testQueryString += ".//name = '" + playerName + "'";
         testQueryString = filterResultsByRound(testQueryString);
@@ -57,10 +60,10 @@ function findResults() {
         styleSheet = sortResultsByRound(styleSheet);
         $(styleSheet).find("xsl\\:when, when").first().attr("test", testQueryString);
         loadAndDisplay(results, styleSheet);
-        console.log((new XMLSerializer()).serializeToString(styleSheet));
 
         // console.log(styleSheet);
     }
+    //Case to deal with partial match with contains match case
     else if ($('#match_case')[0].value === "contains") {
         testQueryString += ".//name[contains(., '" + playerName + "'" + ")]";
         testQueryString = filterResultsByRound(testQueryString);
@@ -89,10 +92,10 @@ function filterResultsByNumberSets(xString) {
     }
     if (radioVal === "equals") {
         if (xString === "") {
-            xString += "count(.//set)= " + numberSets;
+            xString += "count(.//set) =" + numberSets;
         }
         else{
-            xString += " and " + "count(.//set)= " + numberSets;
+            xString += " and " + "count(.//set) =" + numberSets;
         }
     }
     else if (radioVal === "greater than") {
@@ -100,15 +103,15 @@ function filterResultsByNumberSets(xString) {
             xString += "count(.//set)> " + numberSets;
         }
         else{
-            xString += " and " + "count(.//set)> " + numberSets;
+            xString += " and " + "count(.//set) >" + numberSets;
         }
     }
     else if (radioBtns === "less than") {
             if (xString === "") {
-                xString += "count(.//set)< " + numberSets;
+                xString += "count(.//set) <" + numberSets;
             }
             else {
-                xString += " and " + "count(.//set)< " + numberSets;
+                xString += " and " + "count(.//set) <" + numberSets;
             }
         }
     return xString;
