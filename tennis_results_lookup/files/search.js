@@ -16,7 +16,6 @@ function getXML(urlName) {
     });
     return xhr.responseXML;
 }
-
 /* Part 2a
  The appropriate file will be loaded based on a user selection from a drop down
  The default value is set to men(in alphabetical order)
@@ -42,13 +41,18 @@ function findResults() {
     var testQueryString = "";
     chooseCategory();    //load the data file
     var playerName = document.getElementById('player').value;
-    
+
     //Case to deal with empty player text field
     if (playerName === "") {
         testQueryString = filterResultsByRound(testQueryString);
         testQueryString = filterResultsByNumberSets(testQueryString);
         styleSheet = sortResultsByRound(styleSheet);
-        $(styleSheet).find("xsl\\:when, when").first().attr("test", testQueryString);
+        if (testQueryString === "") {
+            styleSheet = sortResultsByRound(styleSheet);
+        }
+        else {
+            $(styleSheet).find("xsl\\:when, when").first().attr("test", testQueryString);
+        }
         loadAndDisplay(results, styleSheet);
         return;
     }
@@ -82,41 +86,41 @@ function findResults() {
  */
 function filterResultsByNumberSets(xString) {
     var numberSets = document.getElementById('sets').value;
-    var radioBtns = document.getElementsByName('group1');
+    var radioButtons = document.getElementsByName('group1');
     var radioVal = '';
-    for (var i = 0, len = radioBtns.length; i < len; i++) {
-        if (radioBtns[i].checked) {
-            radioVal = radioBtns[i].value;
+    for (var i = 0, len = radioButtons.length; i < len; i++) {
+        if (radioButtons[i].checked) {
+            radioVal = radioButtons[i].value;
             break;
         }
     }
     if (radioVal === "equals") {
         if (xString === "") {
-            xString += "count(.//set) =" + numberSets;
+            xString += "count(.//set) =" + numberSets*2;
         }
-        else{
-            xString += " and " + "count(.//set) =" + numberSets;
+        else {
+            xString += " and " + "count(.//set) =" + numberSets*2;
         }
     }
     else if (radioVal === "greater than") {
         if (xString === "") {
-            xString += "count(.//set)> " + numberSets;
+            xString += "count(.//set)> " + numberSets*2;
         }
-        else{
-            xString += " and " + "count(.//set) >" + numberSets;
+        else {
+            xString += " and " + "count(.//set) >" + numberSets*2;
         }
     }
-    else if (radioBtns === "less than") {
-            if (xString === "") {
-                xString += "count(.//set) <" + numberSets;
-            }
-            else {
-                xString += " and " + "count(.//set) <" + numberSets;
-            }
+    else if (radioButtons === "less than") {
+        if (xString === "") {
+            xString += "count(.//set) <" + numberSets*2;
         }
+        else {
+            xString += " and " + "count(.//set) <" + numberSets*2;
+        }
+    }
     return xString;
-    }
-    
+}
+
 /* Part 2d
  This function looks up the value of round selected and the filtering criteria - eq, gt, lt
  The outcome is a string which is appended to the overall testCondition that will be fed into the stylesheet
@@ -124,43 +128,38 @@ function filterResultsByNumberSets(xString) {
 function filterResultsByRound(xString) {
 
     var roundNumber = document.getElementById('round').value;
-    var radioBtns = document.getElementsByName('group2');
-    if (roundNumber === 7) {
-        //FIXME not working properly
-        $('#gt1').disabled = true;
-        window.alert("No rounds greater than 7, select equals or less than");
-    }
-    var radioVal = '';
-    for (var i = 0, len = radioBtns.length; i < len; i++) {
-        if (radioBtns[i].checked) {
-            radioVal = radioBtns[i].value;
-            break;
+    var radioButtons = document.getElementsByName('group2');
+        var radioVal = '';
+        for (var i = 0, len = radioButtons.length; i < len; i++) {
+            if (radioButtons[i].checked) {
+                radioVal = radioButtons[i].value;
+                break;
+            }
         }
-    }
-    if (radioVal === "equals") {
-        if (xString === "") {
-            xString += "round = " + roundNumber;
+        if (radioVal === "equals") {
+            if (xString === "") {
+                xString += "round = " + roundNumber;
+            }
+            else {
+                xString += "and " + "round = " + roundNumber;
+            }
         }
-        else {
-            xString += "and " + "round = " + roundNumber;
+        else if (radioVal === "greater than") {
+            if (xString === "") {
+                xString += "round > " + roundNumber;
+            }
+            else {
+                xString += "and " + "round > " + roundNumber;
+            }
         }
-    }
-    else if (radioVal === "greater than") {
-        if (xString === "") {
-            xString += "round > " + roundNumber;
+        else if (radioVal === "less than") {
+            if (xString === "") {
+                xString += "round < " + roundNumber;
+            }
+            else {
+                xString += "and " + "round < " + roundNumber;
+            }
         }
-        else {
-            xString += "and " + "round > " + roundNumber;
-        }
-    }
-    else if (radioVal === "less than") {
-        if (xString === "") {
-            xString += "round < " + roundNumber;
-        }
-        else {
-            xString += "and " + "round < " + roundNumber;
-        }
-    }
     return xString;
 }
 

@@ -9,6 +9,7 @@ fieldset {
     padding: 10px;
     border: none;
 }
+
 legend {
     background-color: darkgrey;
     font: bold 20px 'trebuchet ms', helvetica, sans-serif;
@@ -17,35 +18,37 @@ legend {
     padding: 5px;
 }
 
-.filter{
+.filter {
     margin: 0.1em;
 }
-#results{
+
+#results {
     width: 495px;
-    height:20px;
+    height: 20px;
     font: bold 20px 'trebuchet ms', helvetica, sans-serif;
     color: purple;
     background-color: darkgrey;
     border: solid darkgrey thin;
 }
 
-.line{
-    width:485px;
+.line {
+    width: 485px;
     border: none;
-    color:darkgrey;
-    background-color:darkgray;
-    height:1px;
-    margin:3px;
-    
+    color: darkgrey;
+    background-color: darkgray;
+    height: 1px;
+    margin: 3px;
+
 }
-.display{
-    width:500px;
-    float:left;
-    border:solid grey 2px;
-    margin-left:5px;
+
+.display {
+    width: 500px;
+    float: left;
+    border: solid grey 2px;
+    margin-left: 5px;
     padding: 0px 10px;
-    background:lightgray;
-    
+    background: lightgray;
+
 }
 
 label {
@@ -77,6 +80,7 @@ label {
     margin-left: 0.2em;
     _top: 0.3em;
 }
+
 .btn {
     color: darkslategray;
     font: bold 84% 'trebuchet ms', helvetica, sans-serif;
